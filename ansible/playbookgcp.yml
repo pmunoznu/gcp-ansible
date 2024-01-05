@@ -1,0 +1,20 @@
+---
+- name: Instalar Apache en Ubuntu
+  hosts: servidor-gcp
+  become: yes
+
+  tasks:
+    - name: Actualizar la lista de paquetes
+      apt:
+        update_cache: yes
+
+    - name: Instalar Apache
+      apt:
+        name: apache2
+        state: present
+
+    - name: Habilitar el servicio Apache
+      systemd:
+        name: apache2
+        enabled: yes
+        state: started
